@@ -21,7 +21,8 @@ float getUserDificulty() {
 }
 
 float getRandomDificulty() {
-    return (rand() / 100) % 100;
+    srand(time(NULL));
+    return (rand() % 100) / 100.0;
 }
 
 /**
@@ -52,4 +53,14 @@ void declareGlobalChaos() {
     for (int child = 0; child < lastChild; child++) {
         kill(children[child], SIGKILL);
     }
+}
+
+/**
+ * Returns a random time where the mr meeseek will be working
+ * @param min {double} minimum value allowed
+ * @param max {double} maximum value allowed
+ */
+double getWorkingTime(double min, double max) {
+    srand(time(NULL));
+    return ((rand() % (int)((max - min) * 100)) / 100.0) + min;
 }
