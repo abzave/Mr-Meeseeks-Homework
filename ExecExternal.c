@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char* askForCommand() {
-    char* str;
+char[] askForCommand() {
+    char str[];
     printf("Please type the desired command: \n");
     scanf("%s", str);
     return str;
@@ -16,6 +16,7 @@ void write_output (FILE * stream)
 }
 
 int main () {
+    askForCommand();
     FILE *output;
     output = popen ("uname", "r");
     if (!output) {
