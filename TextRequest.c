@@ -112,14 +112,3 @@ float diluteDifficult(float difficulty, int helpAmount) {
     }
     return difficulty * (helpAmount + 1) / (1.0f + (difficulty / 100.0f));
 }
-
-int main(void) {
-
-    char* str = "";
-
-    fgets(str, sizeof(str), stdin);
-
-    printf("%f\n", getWorkingTime(minWorkingTime, maxWorkingTime));
-    declareGlobalChaos();
-    return 0;
-}

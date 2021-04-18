@@ -42,3 +42,10 @@ float askFloat(char* message, float min, float max) {
         printf("Debe ingresar una opcion entre %.2f y %.2f: ", min, max);
     }
 }
+    
+void write_output (FILE * stream)
+{
+    char ch;
+    while( (ch=fgetc(stream)) != EOF)
+        putchar(ch);
+}

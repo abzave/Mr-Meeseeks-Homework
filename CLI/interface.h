@@ -7,5 +7,6 @@
 int showMenu(char**, int);
 int askOption(int);
 float askFloat(char*, float, float);
+void write_output (FILE * stream);
 
 #endif

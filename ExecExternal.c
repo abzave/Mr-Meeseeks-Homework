@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char[] askForCommand() {
+/*char[] askForCommand() {
     char str[];
     printf("Please type the desired command: \n");
     scanf("%s", str);
@@ -15,7 +15,7 @@ void write_output (FILE * stream)
         putchar(ch);
 }
 
-int main () {
+/*int main () {
     askForCommand();
     FILE *output;
     output = popen ("uname", "r");
@@ -28,4 +28,4 @@ int main () {
         printf ("I can't solve your request\n");
     }
     return 0;
-}
+}*/

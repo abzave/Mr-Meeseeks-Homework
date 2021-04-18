@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <string.h>
+#include <unistd.h>
 
 #include "CLI/interface.h"
 
@@ -17,14 +18,14 @@
 #define EASY                100
 #define MAX_CHILDREN        100
 
-int timeLimitInSeconds = 300;
-double timeElasep = 0;
+extern int timeLimitInSeconds;
+extern double timeElasep;
 
-pid_t children[MAX_CHILDREN];
-int lastChild = 0;
+extern pid_t children[MAX_CHILDREN];
+extern int lastChild;
 
-double minWorkingTime = 0.5;
-double maxWorkingTime = 5;
+extern double minWorkingTime;
+extern double maxWorkingTime;
 
 float getDificulty(void);
 float getUserDificulty(void);
@@ -33,8 +34,11 @@ float diluteDifficult(float, int);
 
 double timediff(clock_t, clock_t);
 void declareGlobalChaos(void);
+int systemCollapsed(void);
 
 double getWorkingTime(double, double); 
 int problemSolved(float, char*);
+
+int helpAmount(float);
 
 #endif
