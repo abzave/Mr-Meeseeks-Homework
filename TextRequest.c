@@ -12,7 +12,9 @@ float getDificulty() {
     if (selection == USER_INPUT) {
         return getUserDificulty();
     } else {
-        return getRandomDificulty();
+        float difficulty = getRandomDificulty();
+        printf("Difficulty: %f", difficulty);
+        return difficulty;
     }
 }
 
@@ -35,10 +37,10 @@ float getRandomDificulty() {
  */ 
 int problemSolved(float difficulty, char* request) {
     srand(time(NULL));
-    float chance = (rand() % 100) / 100.0f;
+    float chance = (rand() % 100);
     
     int requestLength = strlen(request);
-    chance = chance / requestLength * timeElasep * 10;
+    chance = chance / (float)requestLength * 10.0f;
 
     return chance < difficulty;
 }
@@ -48,18 +50,21 @@ int problemSolved(float difficulty, char* request) {
  * @param initTime {clock_t} first marker
  * @param endTime {clock_t} second marker
  */
-double timediff(clock_t initTime, clock_t endTime) {
-    double elapsed;
-    elapsed = ((double)endTime - initTime) / CLOCKS_PER_SEC * 1000000.0;
-    timeElasep += elapsed;
-    return elapsed;
+double timediff(time_t initTime, time_t endTime) {
+    return (endTime - initTime);
 }
 
 /**
  * Check if the time elapsed is enough to declare global chaos
  */
-int systemCollapsed(){
-    return timeElasep >= timeLimitInSeconds || lastChild >= MAX_CHILDREN;
+int systemCollapsed(int childLevel){
+    return childLevel >= 50;
+}
+
+void killChildren(pid_t children[MAX_CHILDREN], int childrenAmount) {
+    for (int child = 0; child < childrenAmount; child++) {
+        kill(children[child], SIGKILL);
+    }
 }
 
 /**
@@ -68,9 +73,10 @@ int systemCollapsed(){
  */
 void declareGlobalChaos() {
     printf("La solicitud es muy dificil hay caos global :S\n");
-    for (int child = 0; child < lastChild; child++) {
-        kill(children[child], SIGKILL);
-    }
+}
+
+void solveProblem() {
+    printf("Solicitud Completada! Un placer haberle servido. Adios.\n");
 }
 
 /**
@@ -94,6 +100,8 @@ int helpAmount(float difficulty) {
         minAmount += 3;
     } else if (difficulty <= MEDIUM) {
         minAmount += 1;
+    } else {
+        return 0;
     }
 
     srand(time(NULL));

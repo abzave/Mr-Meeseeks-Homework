@@ -2,7 +2,7 @@
 
 int showMenu(char** options, int length) {
     // We want to make sure there is nothing else in the screen
-    system("clear");
+    //system("clear");
 
     printf("********Menu********\n");
     for (int option = 1; option <= length; option++) {
@@ -28,7 +28,7 @@ int askOption(int numberOfOptions) {
 
 float askFloat(char* message, float min, float max) {
     // We want to make sure there is nothing else in the screen
-    system("clear");
+    //system("clear");
     
     printf("%s", message);
 
