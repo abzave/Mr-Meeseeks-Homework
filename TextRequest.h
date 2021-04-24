@@ -1,3 +1,11 @@
+/*
+ * TEC, Cartago, Escuela de Ingeniería en Computación, Principios de Sistemas Operativos
+ * Tarea #2: Mr. Meeseeks
+ * Abraham Meza Vega, 2018168174
+ * Lindsay Morales Bonilla, 2018077301
+ * 24/04/2021, I Semestre 2021, Prof. Esteban Arias Méndez
+*/
+
 #ifndef TEXT_REQUEST
 #define TEXT_REQUEST
 
@@ -30,7 +38,7 @@ float diluteDifficult(float, int);
 
 double timediff(time_t, time_t);
 void declareGlobalChaos(void);
-int systemCollapsed(int);
+int systemCollapsed(int, time_t);
 
 double getWorkingTime(double, double); 
 int problemSolved(float, char*);

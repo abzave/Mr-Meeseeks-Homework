@@ -1,3 +1,11 @@
+/*
+ * TEC, Cartago, Escuela de Ingeniería en Computación, Principios de Sistemas Operativos
+ * Tarea #2: Mr. Meeseeks
+ * Abraham Meza Vega, 2018168174
+ * Lindsay Morales Bonilla, 2018077301
+ * 24/04/2021, I Semestre 2021, Prof. Esteban Arias Méndez
+*/
+
 #include "TextRequest.h"
 
 /**
@@ -13,7 +21,7 @@ float getDificulty() {
         return getUserDificulty();
     } else {
         float difficulty = getRandomDificulty();
-        printf("Difficulty: %f", difficulty);
+        printf("Difficulty: %f\n", difficulty);
         return difficulty;
     }
 }
@@ -24,7 +32,7 @@ float getUserDificulty() {
 
 float getRandomDificulty() {
     srand(time(NULL));
-    return (rand() % 100) / 100.0;
+    return (rand() % 100);
 }
 
 /**
@@ -40,7 +48,7 @@ int problemSolved(float difficulty, char* request) {
     float chance = (rand() % 100);
     
     int requestLength = strlen(request);
-    chance = chance / (float)requestLength * 10.0f;
+    chance = chance / ((float)requestLength * 10.0f);
 
     return chance < difficulty;
 }
@@ -57,12 +65,14 @@ double timediff(time_t initTime, time_t endTime) {
 /**
  * Check if the time elapsed is enough to declare global chaos
  */
-int systemCollapsed(int childLevel){
-    return childLevel >= 50;
+int systemCollapsed(int childLevel, time_t requestStart){
+    time_t currentTime = time(NULL);
+    return timediff(requestStart, currentTime) >= timeLimitInSeconds;
 }
 
-void killChildren(pid_t children[MAX_CHILDREN], int childrenAmount) {
+void killChildren(pid_t *children, int childrenAmount) {
     for (int child = 0; child < childrenAmount; child++) {
+        printf("%d, %d\n", children[child], childrenAmount);
         kill(children[child], SIGKILL);
     }
 }
