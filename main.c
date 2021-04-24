@@ -158,6 +158,9 @@ void createMrMeeseekHelp(int help, float difficulty, char* request, int sem_id, 
             int processInstance;
             int processLevel;
 
+            write(file_pipes[1], request, 300);
+            write(file_pipes[1], "unsolved", 300);
+
             semaphore_p(sem_id);
             struct shared_use_st* sharedData = (struct shared_use_st *)sharedMemory;
             processInstance = sharedData->instance;
@@ -168,8 +171,6 @@ void createMrMeeseekHelp(int help, float difficulty, char* request, int sem_id, 
 
             children[childIndex] = pid;
 
-            write(file_pipes[1], request, 300);
-            write(file_pipes[1], "unsolved", 300);
 
             printf("Tiempo de espera: %f\n", time);
             usleep(time);
@@ -206,6 +207,9 @@ void textMrMeeseekWork(int help, float difficulty, char* request, int sem_id, vo
         killChildren(children, help);
         exit(0);
     } else if (problemSolved(difficulty, request)) {
+        write(file_pipes[1], request, 300);
+        write(file_pipes[1], "solved", 300);
+        
         sharedData->solverPid = getpid();
         sharedData->solverPpid = getppid();
         sharedData->solverLevel = level;
@@ -214,8 +218,6 @@ void textMrMeeseekWork(int help, float difficulty, char* request, int sem_id, vo
 
         solveProblem();
         killChildren(children, help);
-        write(file_pipes[1], request, 300);
-        write(file_pipes[1], "solved", 300);
         exit(0);
     } else if(systemCollapsed(sharedData->level, requestStart)) {
         sharedData->chaos = 1;
